@@ -117,7 +117,7 @@ export default function App() {
     return () => clearInterval(id);
   }, [running, gen, speed]);
 
-  const cellSize = Math.min(64, Math.floor(380 / n));
+  const cellSize = Math.min(72, Math.floor(520 / n));
 
   function cellStyle(r, c) {
     const isBlocked   = blocked[r][c] === 1;
@@ -172,7 +172,8 @@ export default function App() {
   const EVT_COLOR = { TRY:T.blue, PLACE:T.green, CONFLICT:T.red, REMOVE:T.orange, BLOCKED:"#777", SOLVED:T.yellow, FAIL:T.red };
 
   return (
-    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, fontFamily:"'Segoe UI',Tahoma,sans-serif", display:"flex", flexDirection:"column", alignItems:"center", padding:"24px 16px", gap:18 }}>
+    <div style={{ minHeight:"100vh", background:T.bg, color:T.text, fontFamily:"'Segoe UI',Tahoma,sans-serif", display:"flex", flexDirection:"column", alignItems:"center", padding:"28px 40px", gap:20, boxSizing:"border-box", width:"100%" }}>
+      <style>{`* { box-sizing: border-box; } body { margin: 0; padding: 0; background: #1c1c1c; }`}</style>
 
       <div style={{ textAlign:"center" }}>
         <h1 style={{ margin:0, fontSize:23, fontWeight:700, color:T.green, letterSpacing:0.5 }}>N-Camera Placement Visualizer</h1>
@@ -207,12 +208,12 @@ export default function App() {
       {!running && <div style={{ fontSize:12, color:T.textDim }}>Click cells to toggle blocked (skylight) before starting</div>}
 
       {/* Status bar */}
-      <div style={{ padding:"12px 24px", borderRadius:8, border:`1px solid ${s.color}55`, background:s.bg, color:s.color, fontWeight:600, fontSize:14, maxWidth:700, width:"100%", textAlign:"center", boxShadow:`0 0 20px ${s.color}22`, transition:"all 0.2s", lineHeight:1.5 }}>
+      <div style={{ padding:"12px 24px", borderRadius:8, border:`1px solid ${s.color}55`, background:s.bg, color:s.color, fontWeight:600, fontSize:15, width:"100%", maxWidth:1100, textAlign:"center", boxShadow:`0 0 20px ${s.color}22`, transition:"all 0.2s", lineHeight:1.5, boxSizing:"border-box" }}>
         {s.text}
       </div>
 
       {/* Main body */}
-      <div style={{ display:"flex", gap:20, flexWrap:"wrap", justifyContent:"center", alignItems:"flex-start" }}>
+      <div style={{ display:"flex", gap:32, flexWrap:"wrap", justifyContent:"center", alignItems:"flex-start", width:"100%", maxWidth:1100 }}>
 
         {/* Grid */}
         <div>
@@ -255,7 +256,7 @@ export default function App() {
         </div>
 
         {/* Right panels */}
-        <div style={{ display:"flex", flexDirection:"column", gap:14, minWidth:230, maxWidth:270 }}>
+        <div style={{ display:"flex", flexDirection:"column", gap:14, minWidth:280, flex:1, maxWidth:420 }}>
           {/* Legend */}
           <div style={{ background:T.surface, border:`1px solid ${T.border}`, borderRadius:8, padding:14 }}>
             <div style={{ fontSize:11, color:T.textDim, marginBottom:10, textTransform:"uppercase", letterSpacing:1 }}>Legend</div>
@@ -305,7 +306,7 @@ function BottomPanel({ n }) {
   const [tab, setTab] = useState("pseudo");
   const TABS = [{id:"pseudo",label:"Pseudocode"},{id:"time",label:"Time Complexity"},{id:"space",label:"Space Complexity"}];
   return (
-    <div style={{ maxWidth:760, width:"100%" }}>
+    <div style={{ maxWidth:1100, width:"100%" }}>
       <div style={{ display:"flex", gap:3 }}>
         {TABS.map(t=>(
           <button key={t.id} onClick={()=>setTab(t.id)} style={{ padding:"8px 18px", fontFamily:"inherit", fontSize:12.5, cursor:"pointer", borderRadius:"6px 6px 0 0", border:"none",
